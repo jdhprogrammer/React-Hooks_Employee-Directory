@@ -55,7 +55,9 @@ function Search() {
           results={search}
         />
         {/* <SearchResults title={title} url={url} /> */}
-        <Table dark striped hover></Table>
+        <Table dark striped hover>
+          
+        </Table>
       </Container>
     </div>
   );

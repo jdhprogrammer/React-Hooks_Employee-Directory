@@ -24,3 +24,4 @@ yarn-error.log*
 
 backups
 
+/client/node_modules

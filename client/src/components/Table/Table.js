@@ -21,7 +21,7 @@ import { Table } from 'reactstrap';
 
 const Example = ({dark, striped, hover}) => {
   return (
-    <Table dark striped hover >
+    <Table striped hover >
       <thead>
         <tr>
           <th>#</th>

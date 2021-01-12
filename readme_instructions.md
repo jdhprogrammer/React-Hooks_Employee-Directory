@@ -53,3 +53,11 @@ You are required to submit the following:
 * the URL to the deployed application
 
 * the URL to the Github repository
+
+
+
+Answers
+
+credit -
+
+https://www.npmjs.com/package/reactstrap, https://reactstrap.github.io/components/tables/, https://bit.dev/reactstrap/reactstrap/table, 

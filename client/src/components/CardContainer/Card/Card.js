@@ -1,8 +1,8 @@
 import React from "react";
-import CardBtn from "../CardBtn";
+import CardBtn from "./Cardbtn/Cardbtn";
 import CardContext from "../../utils/CardContext";
-import CardTitle from "../CardTitle";
-import "./style.css";
+import CardTitle from "./CardTitle/CardTitle";
+import "./Card.css";
 
 function Card() {
   return (
