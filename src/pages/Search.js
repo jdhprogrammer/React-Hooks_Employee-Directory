@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import Container from "../components/Container";
-import SearchForm from "../components/SearchForm";
-import SearchResults from "../components/SearchResults";
-import Alert from "../components/Alert";
+import Container from "../components/Container/Container";
+import SearchForm from "../components/SearchForm/SearchForm";
+import SearchResults from "../components/SearchResults/SearchResults";
+import Alert from "../components/Alert/Alert";
+import Table from "../components/Table/Table";
 import useDebounce from "../utils/useDebounce"
 
 function Search() {
@@ -39,8 +40,12 @@ function Search() {
 
   return (
     <div>
+        <Hero backgroundImage="">
+        <h1>Employee Directory</h1>
+        <h2>Search for Employees &AMP; Sort Them!</h2>
+      </Hero>
       <Container style={{ minHeight: "100vh" }}>
-        <h1 className="text-center">Search For Anything on Wikipedia</h1>
+        {/* <h1 className="text-center">Search For Anything on Wikipedia</h1> */}
         <Alert type="danger" style={{ opacity: error ? 1 : 0, marginBottom: 10 }}>
           {error}
         </Alert>
@@ -48,7 +53,8 @@ function Search() {
           handleInputChange={handleInputChange}
           results={search}
         />
-        <SearchResults title={title} url={url} />
+        {/* <SearchResults title={title} url={url} /> */}
+        <Table></Table>
       </Container>
     </div>
   );
