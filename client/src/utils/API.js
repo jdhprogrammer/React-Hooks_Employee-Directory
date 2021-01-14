@@ -1,9 +1,6 @@
 import axios from "axios";
 
 // Export an object containing methods we'll use for accessing the Employee DB
-
-import axios from "axios";
-
 export default {
   // Gets all posts
   getPosts: function() {

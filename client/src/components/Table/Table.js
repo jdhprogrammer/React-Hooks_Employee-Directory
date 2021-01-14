@@ -6,10 +6,11 @@ const Table = ({employees}) => {
     <table dark striped hover >
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>DOB</th>
         </tr>
       </thead>
       <tbody>

@@ -1,3 +1,3 @@
 module.exports = {
-  Post: require("./employee")
+  Employee: require("./employee")
 };

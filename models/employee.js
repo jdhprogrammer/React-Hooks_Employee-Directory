@@ -49,7 +49,7 @@ const employeeSchema = new Schema({
   },
     phone: String,
     cell: String,
-    id: {
+    ID: {
       name: String,
       value: String
   },
