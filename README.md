@@ -117,7 +117,7 @@ Employee Directory <br>
 <br>
 Employee Directory - Search & Filter Employees <br>
 
-[<img src="./assets/images/screenshots/EmpDir_Directory_Search_filter.jpeg?raw=true" height="300"/>](./assets/images/screenshots/EmpDir_Directory_Search_filter.jpeg?raw=true)
+[<img src="./assets/images/screenshots/EmpDir_Directory_Search_filter.jpg?raw=true" height="300"/>](./assets/images/screenshots/EmpDir_Directory_Search_filter.jpg?raw=true)
 
 <br>
 Employee Directory - Email Button reveals Toast-Pop-Up <br>
