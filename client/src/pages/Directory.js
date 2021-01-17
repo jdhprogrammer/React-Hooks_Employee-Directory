@@ -10,6 +10,7 @@ import Hero from "../components/Hero/Hero"
 import Table from "react-bootstrap/Table"
 // import TableBody from "../components/Table/TableBody"
 import TableRow from "../components/Table/TableRow/TableRow"
+import "./Directory.css"
 
 
 function Directory() {
@@ -86,12 +87,23 @@ function Directory() {
           const sortB = b[sortConfig.key];
           const nameA = sortA["last"];
           const nameB = sortB["last"];
+          const dobA = sortA["date"];
+          const dobB = sortB["date"];
           if (sortConfig.key === "name") {
             // console.log("here")
             if (nameA < nameB) {
               return sortConfig.direction === 'ascending' ? -1 : 1;
             }
             else if (nameA > nameB) {
+              return sortConfig.direction === 'ascending' ? 1 : -1;
+            }
+          }
+          else if (sortConfig.key === "dob") {
+            // console.log("here")
+            if (dobA < dobB) {
+              return sortConfig.direction === 'ascending' ? -1 : 1;
+            }
+            else if (dobA > dobB) {
               return sortConfig.direction === 'ascending' ? 1 : -1;
             }
           }
@@ -133,16 +145,12 @@ function Directory() {
     };
 
     return (
-      <Table striped hover >
+      <Table striped hover variant="dark" responsive="sm" >
       {/* <TableBody employees={employees}/> */}
       <thead>
       <tr>
         <th>
-          <div
-            type="button"
-            onClick={() => requestSort('image')}
-            className={getClassNamesFor('image')}
-          >
+          <div>
             Image
           </div>
           </th>
@@ -199,15 +207,19 @@ function Directory() {
 
   return (
     <div>
-      <Hero backgroundImage="">
+      <Hero >
         <h1>Employee Directory</h1>
-        <h2>Search for Employees &amp; Sort Them!</h2>
+      
+        <h6>Search Employees by name using the Search Bar.</h6> 
+        <h6>Click on Employee Name to see more Detail.</h6> 
+        <h6>Click on Table Headings to Sort by Name, Phone, etc.</h6>
+
       </Hero>
       <Container style={{minHeight: "100vh"}}>
-        {/* <h1 className="text-center">Search For Anything on Wikipedia</h1> */}
         <Alert type="danger" style={{opacity: error ? 1 : 0, marginBottom: 10}}>
           {error}
         </Alert>
+
         <SearchForm
           handleInputChange={handleInputChange}
           results={search}
