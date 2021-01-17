@@ -160,8 +160,8 @@ https://stackoverflow.com/questions/25159330/convert-an-iso-date-to-the-date-for
 Distributed under the [MIT](https://choosealicense.com/licenses/mit/). See LICENSE for more information.
   
 
-## Contact
-
+## Contact  
+  
 David Harris - jdh.programmer@gmail.com
 
 Project Link: [https://github.com/jdhprogrammer/React-Hooks_Employee-Directory](https://github.com/jdhprogrammer/React-Hooks_Employee-Directory)

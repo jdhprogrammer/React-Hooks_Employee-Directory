@@ -53,3 +53,33 @@ You are required to submit the following:
 * the URL to the deployed application
 
 * the URL to the Github repository
+
+https://github.com/jdhprogrammer/React-Hooks_Employee-Directory
+
+jdhprogrammer
+
+jdh.programmer@gmail.com
+
+React-Hooks_Employee-Directory
+
+React-Hooks: Employee Directory
+
+Employee or User Directory built with with the Full MERN application portfolio. MongoDB, Express, React, Node. Basically a Table of Employees/Users. You can search by name and filter the employees. You can Sort by Name, Phone number, Email, and Date of Birth. You can click the Email button to see a "toast pop-up" with the email. You can Click on Employee name to see a detail page with a few more details for that employee.
+
+Visit the Webpage and Manipulate the Employee Directory Table using the different options available.
+
+
+
+
+## User Story
+
+* As a user, I want to be able to view my entire employee directory at once so that I have quick access to their information.
+
+## Business Context
+
+An employee or manager would benefit greatly from being able to view non-sensitive data about other employees. It would be particularly helpful to be able to filter employees by name.
+
+EmpDir_Directory_Detail_employee.jpeg, EmpDir_Directory_Search_filter.jpeg, EmpDir_Directory_Email_toast.jpeg, EmpDir_Directory_Sort_dob.jpeg, EmpDir_Directory_Sort_name.jpeg, EmpDir_Directory_Sort_phone.jpeg, EmpDir_Directory.jpeg,
+
+https://www.tutorialrepublic.com/faq, how-to-determine-if-variable-is-undefined-or-null-in-javascript.php, https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic?file=/src/App.js:364-665, https://randomuser.me/, https://getbootstrap.com/docs/4.0/content/tables/, https://react-bootstrap.github.io/components/table/, https://stackoverflow.com/questions/37401635/react-js-wait-for-setstate-to-finish-before-triggering-a-function, https://stackoverflow.com/questions/55777828/react-state-not-updating-on-backspace, https://codesandbox.io/s/table-sorting-example-ur2z9?from-embed=&file=/src/App.js:979-1248, https://stackoverflow.com/questions/25159330/convert-an-iso-date-to-the-date-format-yyyy-mm-dd-in-javascript
+
