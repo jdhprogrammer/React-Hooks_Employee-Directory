@@ -2,20 +2,24 @@ import React, {useState, useEffect} from "react";
 import API from "../utils/API";
 import Container from "../components/Container/Container";
 import SearchForm from "../components/SearchForm/SearchForm";
-import SearchResults from "../components/SearchResults/SearchResults";
+// import SearchResults from "../components/SearchResults/SearchResults";
 import Alert from "../components/Alert/Alert";
-import Table from "../components/Table/Table";
+// import Table from "../components/Table/Table";
 
 import Hero from "../components/Hero/Hero"
+import Table from "react-bootstrap/Table"
+// import TableBody from "../components/Table/TableBody"
+import TableRow from "../components/Table/TableRow/TableRow"
+
 
 function Directory() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(" ");
+  const [error, setError] = useState("");
   const [employees, setEmployees] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
   // const deBouncedSeachTerm = useDebounce(search, 5000)
 
-  
   const getEmployees = () => {
     API.getEmployees()
     .then(res => {
@@ -23,32 +27,175 @@ function Directory() {
         throw new Error("No results found.");
       }
       if (res.data.status === "error") {
-        throw new Error(res.data.message);
+        throw setError(res.data.message);
       }
       setEmployees(res.data);
-      console.log(employees)
+      setFiltered(res.data);
     })
     .catch(err => console.log(err));
   }
   
-  const searchEmployees = (search) => {
-    setFiltered(employees.filter((employee) => {
-      employee.name.first.includes(search) 
-      || employee.name.last.includes(search)
-    }));
+  const filterEmployees = () => {
+    const filter = employees.filter((employee) => employee.name.first.toLowerCase().includes(search.toLowerCase().trim()) || employee.name.last.toLowerCase().includes(search.toLowerCase().trim()));
+    
+    setFiltered(filter)
+    
+    return
   }
   
   useEffect(() => {
-    if (!employees){
-    getEmployees();
-    return;
+  
+    if (employees.length === 0) {
+      getEmployees();
     }
-    searchEmployees(search)
-  }, [search]);
+    else if (!search) {
+      setFiltered(employees)
+        return;
+      }
+    else {
+     
+      filterEmployees(search);
+      return;
+    }
 
+  }, [search]);
+  
   const handleInputChange = event => {
     setSearch(event.target.value);
   };
+
+  // const handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   console.log(event.target.value)
+  //   setSearch(event.target.value)
+  //   console.log(search)
+  //   searchEmployees(search)
+  //   console.log("---- searching employees ----")
+  // };
+
+  // -----------------------------------------------------------------------------
+
+  const useSortableData = (filtered, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+  
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = [...filtered];
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          const sortA = a[sortConfig.key];
+          const sortB = b[sortConfig.key];
+          const nameA = sortA["last"];
+          const nameB = sortB["last"];
+          if (sortConfig.key === "name") {
+            // console.log("here")
+            if (nameA < nameB) {
+              return sortConfig.direction === 'ascending' ? -1 : 1;
+            }
+            else if (nameA > nameB) {
+              return sortConfig.direction === 'ascending' ? 1 : -1;
+            }
+          }
+          else if (sortA < sortB) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          else if (sortA > sortB) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [filtered, sortConfig]);
+  
+    const requestSort = (key) => {
+      
+      let direction = 'ascending';
+      if (
+        sortConfig &&
+        sortConfig.key === key &&
+        sortConfig.direction === 'ascending'
+      ) {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    };
+  
+    return { filtered: sortedItems, requestSort, sortConfig };
+  };
+
+  const EmployeeTable = (props) => {
+    const { filtered, requestSort, sortConfig } = useSortableData(props. directory);
+    const getClassNamesFor = (name) => {
+      if (!sortConfig) {
+        return;
+      }
+      return sortConfig.key === name ? sortConfig.direction : undefined;
+    };
+
+    return (
+      <Table striped hover >
+      {/* <TableBody employees={employees}/> */}
+      <thead>
+      <tr>
+        <th>
+          <div
+            type="button"
+            onClick={() => requestSort('image')}
+            className={getClassNamesFor('image')}
+          >
+            Image
+          </div>
+          </th>
+        <th>
+          <div
+            type="button"
+            onClick={() => requestSort('name')}
+            className={getClassNamesFor('name')}
+          >
+            Name
+          </div>
+          </th>
+        <th>
+        <div
+            type="button"
+            onClick={() => requestSort('phone')}
+            className={getClassNamesFor('phone')}
+          >
+            Phone
+          </div>
+          </th>
+        <th>
+        <div
+            type="button"
+            onClick={() => requestSort('email')}
+            className={getClassNamesFor('email')}
+          >
+           Email
+          </div>
+          </th>
+        <th>
+        <div
+            type="button"
+            onClick={() => requestSort('dob')}
+            className={getClassNamesFor('dob')}
+          >
+            DOB
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    {filtered.map((employee) => (
+        <TableRow
+          key={employee._id}
+          employee={employee}/>
+      ))}
+    </tbody>
+      </Table>
+    );
+  };
+  // -----------------------------------------------------------------------------
+
 
   return (
     <div>
@@ -63,10 +210,11 @@ function Directory() {
         </Alert>
         <SearchForm
           handleInputChange={handleInputChange}
-          search={search}/>
-        {/* <SearchResults title={title} url={url} /> */}
-        <Table employees={filtered}>
-        </Table>
+          results={search}
+          />
+        {/* <SearchResults title={title} url={url} />  */}
+       <EmployeeTable  directory={filtered}/>
+         
       </Container>
     </div>
   );

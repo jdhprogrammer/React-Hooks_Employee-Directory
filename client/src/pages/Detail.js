@@ -1,73 +1,117 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Col, Row, Container } from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 import API from "../utils/API";
-import { useStoreContext } from "../utils/GlobalState";
-import { SET_CURRENT_POST, ADD_FAVORITE, REMOVE_FAVORITE } from "../utils/actions";
 
 const Detail = props => {
-  const [state, dispatch] = useStoreContext();
+
+  const { id } = useParams();
+
+  const [current, setCurrent] = useState({
+    name: {
+      first: "David",
+      last: "Harris"
+    },
+    picture: {
+      large: "http://placehold.it/300x300"
+    },
+    name: {
+      title: "String",
+      first: "String",
+      last: "String",    
+    },
+    location: {
+      street: {
+        number: "String",
+        name: "String",      
+      },
+      city: "String",
+      state: "String",
+      country:  "String",
+      postcode: "String",
+      coordinates: {
+        latitude: "String",
+        longitude: "String"
+      },
+      timezone: {
+        offset: "String",
+        description: "String"
+      }
+    },
+    email: "String",
+    login: {
+      uuid: "String",
+      username: "String",
+      password: "String",
+      salt: "String",
+  
+      md5: "String",
+  
+      sha1: "String",
+      sha256: "String"
+    },
+      dob: {
+        date: "String",
+        age: "String"
+    },
+      registered: {
+        date: "String",
+        age: "String"
+    },
+      phone: "String",
+      cell: "String",
+      ID: {
+        name: "String",
+        value: "String"
+    },
+  });
+  
+
 
   useEffect(() => {
-    API.getPost(props.match.params.id)
-      .then(res => dispatch({ type: SET_CURRENT_POST, post: res.data }))
-      .catch(err => console.log(err));
-  }, []);
-
-  const addFavorite = () => {
-    dispatch({
-      type: ADD_FAVORITE,
-      post: state.currentPost
-    });
-  };
-
-  const removeFavorite = () => {
-    dispatch({
-      type: REMOVE_FAVORITE,
-      _id: state.currentPost._id
-    });
-  };
+    API.getEmployee(id)
+    .then(res => setCurrent(res.data))
+    .catch(err => console.log(err));
+    }, []);
 
   return (
-    <>{state.currentPost ? (
+    <>{current ? (
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+            <Jumbotron className="text-center">
               <h1>
-                {state.currentPost.title} by {state.currentPost.author}
+                {current.name.first} {current.name.last}
               </h1>
             </Jumbotron>
           </Col>
         </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
+        <Row className="text-center">
+          <Col size="md-10 text-center">
+            
             <article>
-              <h1>Content:</h1>
-              <p>{state.currentPost.body}</p>
+              <img style={{height: 500, width: 500}} alt={current.name.first} src={current.picture.large}/>
+              <h4>{current.phone}</h4>
+              <h4>{current.email}</h4>
+              <h4>{current.location.street.number} {current.location.street.name} </h4>
+              <h4>{current.location.city}, {current.location.state}, {current.location.country}</h4>
+              
             </article>
           </Col>
-          {state.favorites.indexOf(state.currentPost) !== -1 ? (
-            <button className="btn btn-danger" onClick={removeFavorite}>
-                Remove from Favorites!
-            </button>
-          ) : (
-            <button className="btn" onClick={addFavorite}>
-                ❤️ Add to Favorites
-            </button>
-          )}
         </Row>
         <Row>
           <Col size="md-2">
-            <Link to="/">← Back to Posts</Link>
+            <Link to="/">← Back to Directory</Link>
           </Col>
         </Row>
+        
       </Container>
-    ) : (
-      <div>loading...</div>
-    )}</>
+       ) : (
+        <div>loading</div>
+        )} </>
   );
 };
+
 
 export default Detail;

@@ -1,9 +1,11 @@
 import React from "react"
 import TableRow from "./TableRow/TableRow"
 
-const Table = ({employees}) => {
+
+const TableBody = ({employees}) => {
+
   return (
-    <table dark striped hover >
+   <>
       <thead>
         <tr>
           <th>Image</th>
@@ -20,9 +22,11 @@ const Table = ({employees}) => {
             employee={employee}/>
         ))}
       </tbody>
-    </table>
+   </>
   );
 }
+      
 
-export default Table;
+
+export default TableBody;
   

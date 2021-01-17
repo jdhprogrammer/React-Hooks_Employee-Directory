@@ -11,16 +11,16 @@ const employeeSchema = new Schema({
   },
   location: {
     street: {
-      number: { type: Number, required: true },
+      number: { type: String, required: true },
       name: { type: String, required: true }
     },
     city: { type: String, required: true },
     state: String,
     country:  { type: String, required: true },
-    postcode: { type: Number, required: true },
+    postcode: { type: String, required: true },
     coordinates: {
-      latitude: Number,
-      longitude: Number
+      latitude: String,
+      longitude: String
     },
     timezone: {
       offset: String,
@@ -41,11 +41,11 @@ const employeeSchema = new Schema({
   },
     dob: {
       date: String,
-      age: Number
+      age: String
   },
     registered: {
       date: String,
-      age: Number
+      age: String
   },
     phone: String,
     cell: String,
